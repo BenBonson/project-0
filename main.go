@@ -17,7 +17,7 @@ func main() {
 
 	//check for bank account
 	if bank.Account() {
-		fmt.Println("HOW")
+		fmt.Println("Welcome back", name, "how can I help you?") //add options
 	} else {
 		fmt.Println("Welcome", name, "I see you do not have an account with us would you like to set one up? [Y] or [N]")
 	}
