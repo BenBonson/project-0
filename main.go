@@ -7,22 +7,47 @@ import (
 	"github.com/190930-UTA-CW-Go/project-0/bank"
 
 	"strings"
+
+	"database/sql"
+
+	//imports the db
+	_ "github.com/lib/pq"
+)
+
+const (
+	host     = "localhost"
+	port     = 5432
+	user     = "postgres"
+	password = "postgres"
+	dbname   = "postgres"
 )
 
 func main() {
+	//gets data from db
+	datasource := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+		host, port, user, password, dbname)
+	db, err := sql.Open("postgres", datasource)
+	defer db.Close()
+	if err != nil {
+		panic(err)
+	}
 	//get player name
 	var name string
 	fmt.Println("Hello adventurer please state your name.")
 	fmt.Scanln(&name)
 
+	// //figure out how to Serial aka add one to the id value
+	// db.Exec("INSERT INTO bankaccount VALUES"(id+1, name))
+	// getAll(db)
+
 	//check for bank account
 	if bank.Account() {
-		fmt.Println("Welcome back", name, "how can I help you?") //add options
+		fmt.Println("Welcome back", name, "how can I help you?") //add options deposit withdraw
 	} else {
 		fmt.Println("Welcome", name, "I see you do not have an account with us would you like to set one up? [Y] or [N]")
 	}
 
-	//create account
+	//create account       find out how to update db with user input
 	var acreate string
 	fmt.Scanln(&acreate)
 	var acreatelower = strings.ToLower(acreate)
@@ -32,6 +57,8 @@ func main() {
 	} else {
 		fmt.Println("Well, good luck with that. Just so you know if you store your gold at the bank you will be unable to bet it however you wont lose it if you are beaten.")
 	}
+
+	fmt.Println(db)
 
 	//Notes and references
 
@@ -56,4 +83,8 @@ func main() {
 	// fund.Withdraw(45)
 
 	// fmt.Println(fund.Balance())
+
+	//Current problems,
+	//Serial the id
+	//Figure out how to reaccess an already existing db
 }
