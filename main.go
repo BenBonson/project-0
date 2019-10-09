@@ -31,14 +31,11 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	getAll(db)
 	//get player name
 	var name string
 	fmt.Println("Hello adventurer please state your name.")
 	fmt.Scanln(&name)
-
-	// //figure out how to Serial aka add one to the id value
-	// db.Exec("INSERT INTO bankaccount VALUES"(id+1, name))
-	// getAll(db)
 
 	//check for bank account
 	if bank.Account() {
@@ -51,14 +48,16 @@ func main() {
 	var acreate string
 	fmt.Scanln(&acreate)
 	var acreatelower = strings.ToLower(acreate)
-	fmt.Println(acreatelower)
+	//check for user input
+	//fmt.Println(acreatelower)
 	if acreatelower == "y" {
 		fmt.Println("Alright let me create that for you. Just so you know if you store your gold at the bank you will be unable to bet it however you wont lose it if you are beaten.")
+		//figure out how to Serial aka add one to the id value
+		db.Exec("INSERT INTO bankaccount VALUES (4, name, 10.3)")
+		getAll(db)
 	} else {
 		fmt.Println("Well, good luck with that. Just so you know if you store your gold at the bank you will be unable to bet it however you wont lose it if you are beaten.")
 	}
-
-	fmt.Println(db)
 
 	//Notes and references
 
@@ -86,5 +85,18 @@ func main() {
 
 	//Current problems,
 	//Serial the id
-	//Figure out how to reaccess an already existing db
+	//print out database
+	//does the database stay changes or not
+}
+
+//attempt
+func getAll(db *sql.DB) {
+	rows, _ := db.Query("SELECT * FROM bankaccount")
+	for rows.Next() {
+		var id int
+		var name string
+		var funds float64
+		rows.Scan(&id, &name, &funds)
+		fmt.Println(id, name, funds)
+	}
 }

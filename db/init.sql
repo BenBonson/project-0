@@ -1,5 +1,5 @@
 create table bankaccount (
-    id Serial primary key,
+    id integer primary key,
     name varchar unique,
     funds FLOAT 
 );
