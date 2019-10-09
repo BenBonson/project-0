@@ -31,7 +31,9 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	getAll(db)
+	//check table
+	//getAll(db)
+
 	//get player name
 	var name string
 	fmt.Println("Hello adventurer please state your name.")
@@ -44,7 +46,7 @@ func main() {
 		fmt.Println("Welcome", name, "I see you do not have an account with us would you like to set one up? [Y] or [N]")
 	}
 
-	//create account       find out how to update db with user input
+	//create account
 	var acreate string
 	fmt.Scanln(&acreate)
 	var acreatelower = strings.ToLower(acreate)
@@ -52,9 +54,10 @@ func main() {
 	//fmt.Println(acreatelower)
 	if acreatelower == "y" {
 		fmt.Println("Alright let me create that for you. Just so you know if you store your gold at the bank you will be unable to bet it however you wont lose it if you are beaten.")
-		//figure out how to Serial aka add one to the id value
-		db.Exec("INSERT INTO bankaccount VALUES (4, name, 10.3)")
-		getAll(db)
+		//add new account with a 0 balance under the player name
+		db.Exec("insert into bankaccount (name, funds) values ($1, 0)", name)
+		//check table
+		//getAll(db)
 	} else {
 		fmt.Println("Well, good luck with that. Just so you know if you store your gold at the bank you will be unable to bet it however you wont lose it if you are beaten.")
 	}
@@ -89,7 +92,7 @@ func main() {
 	//does the database stay changes or not
 }
 
-//attempt
+//getAll
 func getAll(db *sql.DB) {
 	rows, _ := db.Query("SELECT * FROM bankaccount")
 	for rows.Next() {
