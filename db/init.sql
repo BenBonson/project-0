@@ -4,6 +4,6 @@ create table bankaccount (
     funds FLOAT 
 );
 
-insert into bankaccount (name, funds) values ('Bulbasaur', 12.3123);
-insert into bankaccount (name, funds) values ('Ivysaur', 42);
-insert into bankaccount (name, funds) values ('Venasaur', 32.23132);
+insert into bankaccount (name, funds) values ('Lokier FellHeart', 12.3123);
+insert into bankaccount (name, funds) values ('Brave Sir Robin', 42);
+insert into bankaccount (name, funds) values ('Bob', 32.23132);

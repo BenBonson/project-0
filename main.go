@@ -4,13 +4,13 @@ import (
 	"fmt"
 
 	//links to bank.go
-	"github.com/190930-UTA-CW-Go/project-0/bank"
 
 	"strings"
 
 	"database/sql"
 
 	//imports the db
+	"github.com/190930-UTA-CW-Go/project-0/bank"
 	_ "github.com/lib/pq"
 )
 
@@ -34,6 +34,10 @@ func main() {
 	//check table
 	//getAll(db)
 
+	//Current location Home
+	// var clocal string
+	// clocal == "H"
+
 	//get player name
 	var name string
 	fmt.Println("Hello adventurer please state your name.")
@@ -43,14 +47,18 @@ func main() {
 	fmt.Println("Thanks for playing my game, where would you like to go?. \n [S]hop [A]rena [B]ank")
 	fmt.Scanln(&tolocation)
 	var tolocationlower = strings.ToLower(tolocation)
-	if tolocationlower == "s" {
+	//call the func bank
+	//bank
+	//location = bank or something would probably be cleaner
+	//check for bank account
+
+	//make a func that runs bank   TRY SWITCH STATMENTS
+	switch tolocationlower {
+	case "s":
 		fmt.Println("Sorry not avalible yet")
-	} else if tolocationlower == "a" {
+	case "a":
 		fmt.Println("Sorry not avalible yet")
-	} else if tolocationlower == "b" {
-		fmt.Println("sup")
-		//location = bank or something would probably be cleaner
-		//check for bank account
+	case "b":
 		if bank.Account() {
 			fmt.Println("Welcome back", name, "how can I help you?") //add options deposit withdraw
 		} else {
@@ -64,47 +72,48 @@ func main() {
 			if acreatelower == "y" {
 				fmt.Println("Alright let me create that for you. Just so you know if you store your gold at the bank you will be unable to bet it however you wont lose it if you are beaten.")
 				//add new account with a 0 balance under the player name
-				db.Exec("insert into bankaccount (name, funds) values ($1, 0)", name)
+				db.Exec("insert into bankaccount (name, funds) values ($1, 10.5)", name)
 				//check table
 				//getAll(db)
 			} else {
 				fmt.Println("Well, good luck with that. Just so you know if you store your gold at the bank you will be unable to bet it however you wont lose it if you are beaten.")
 			}
-
 		}
-	} else {
-		fmt.Println("Sorry not an option please choose S]hop [A]rena [B]ank")
-		//figure out how to reask for input
+	default:
+		//var tolocation string
+		fmt.Println("Sorry not an option please choose [S]hop [A]rena [B]ank")
+		// fmt.Scanln(&tolocation)
+		// var tolocationlower = strings.ToLower(tolocation)
+
+		//Notes and references
+
+		// initbalance := flag.Float64("balance", 100, "default balance")
+		// name := flag.String("name", "Mehrab", "default name")
+		// flag.Parse()
+
+		// fmt.Println(*name)
+		// fund := fund.NewFund(*initbalance)
+
+		// lock := make(chan bool)
+
+		// go func() {
+		// 	fund.Withdraw(50)
+		// 	lock <- false
+		// }()
+
+		// //fmt.Println("Hit enter to continue")
+		// //fmt.Scanln()
+
+		// <-lock
+		// fund.Withdraw(45)
+
+		// fmt.Println(fund.Balance())
+
+		//Current problems,
+		//Serial the id
+		//print out database
+		//does the database stay changes or not
 	}
-
-	//Notes and references
-
-	// initbalance := flag.Float64("balance", 100, "default balance")
-	// name := flag.String("name", "Mehrab", "default name")
-	// flag.Parse()
-
-	// fmt.Println(*name)
-	// fund := fund.NewFund(*initbalance)
-
-	// lock := make(chan bool)
-
-	// go func() {
-	// 	fund.Withdraw(50)
-	// 	lock <- false
-	// }()
-
-	// //fmt.Println("Hit enter to continue")
-	// //fmt.Scanln()
-
-	// <-lock
-	// fund.Withdraw(45)
-
-	// fmt.Println(fund.Balance())
-
-	//Current problems,
-	//Serial the id
-	//print out database
-	//does the database stay changes or not
 }
 
 //getAll
