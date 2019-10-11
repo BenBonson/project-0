@@ -2,6 +2,13 @@ package bank
 
 // Account bool Checks for account
 func Account() bool {
+	//scan through database for name
+	// if {
+	// 	name is in the database
+	//	var account = true
+	// } else {
+	//	var account = false
+	//}
 	var account = false
 	return account
 }
