@@ -12,6 +12,7 @@ import (
 
 	"github.com/190930-UTA-CW-Go/project-0/arena"
 	"github.com/190930-UTA-CW-Go/project-0/bank"
+	"github.com/190930-UTA-CW-Go/project-0/cfunds"
 	"github.com/190930-UTA-CW-Go/project-0/name"
 	"github.com/190930-UTA-CW-Go/project-0/shop"
 
@@ -50,6 +51,8 @@ func main() {
 func Nav() string {
 	name := name.GetName()
 	var tolocation string
+	cfunds := cfunds.Cfunds()
+	fmt.Println("Currently holding", cfunds, "Gold")
 	fmt.Println("Where would you like to go", name, "? \n [S]hop [A]rena [B]ank")
 	fmt.Scanln(&tolocation)
 	var tolocationlower = strings.ToLower(tolocation)

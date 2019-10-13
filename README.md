@@ -1,5 +1,5 @@
-# Insert Project Name Here
-## Insert Name Here
+# Project 0 Text Adventure
+## Ben Bonson
 Insert project description here.
 
 # User Stories
@@ -169,6 +169,30 @@ check with docker ps
 //     fmt.Printf("true")
 // }
 
+
+// // Fund is a simple struct representing a balance
+// type Fund struct {
+// 	balance float64
+// }
+
+// // NewFund is a basic constructor for Fund struct
+// func NewFund(i float64) *Fund {
+// 	return &Fund{
+// 		balance: i,
+// 	}
+// }
+
+// // Balance returns the current balance of a Fund
+// func (f *Fund) Balance() float64 {
+// 	return f.balance
+// }
+
+// // Withdraw removes an amount from the current balance of a Fund
+// func (f *Fund) Withdraw(i float64) {
+// 	f.balance -= i
+// }
+
+
 # Notes and unused code from main
 
 	//navigation.Nav()
@@ -224,3 +248,37 @@ check with docker ps
 		// fmt.Println("Sorry not an option please choose [S]hop [A]rena [B]ank")
 		// fmt.Scanln(&tolocation)
 		// var tolocationlower = strings.ToLower(tolocation)
+
+# Name attempts and references
+
+//Name prints player name
+// func Name() {
+// 	fmt.Println(playername)
+// }
+
+// //GetName gets player name and returns it
+// func GetName() string {
+// 	//get player name
+// 	var Name string
+// 	// if len(Name) > 0 {
+// 	// 	fmt.Println("Sup")
+// 	// } else {
+// 	fmt.Println("Hello adventurer please state your name.")
+// 	fmt.Scanln(&Name)
+// 	//}
+// 	return Name
+// }
+
+// // func name() {
+// // 	name := GetName(Name)
+// // }
+
+// func name() {
+// 	name := GetName(Name)
+// }
+
+//improves name getting
+// reader := bufio.newReader(os.Stdin)
+//     var name string
+//     fmt.Println("What is your name?")
+//     name, _ := reader.readString("\n")

@@ -6,6 +6,7 @@ import (
 	"log"
 	"strings"
 
+	"github.com/190930-UTA-CW-Go/project-0/cfunds"
 	"github.com/190930-UTA-CW-Go/project-0/name"
 	//"github.com/190930-UTA-CW-Go/project-0/navigation"
 )
@@ -40,7 +41,8 @@ func Account() bool {
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Println(name, funds)
+		//print to check if its working
+		//fmt.Println(name, funds)
 		return true
 	}
 	err = rows.Err()
@@ -61,18 +63,63 @@ func Bank() {
 	}
 
 	name := name.GetName()
-
+	cfunds := cfunds.Cfunds()
+	fmt.Println("Currently holding", cfunds, "Gold")
 	if Account() == true {
-		fmt.Println("Welcome back", name, "how can I help you? [W]ithdraw [D]eposit") //add options deposit withdraw
+		fmt.Println("Welcome back", name, "how can I help you? [W]ithdraw [D]eposit")
 		var moneydo string
 		fmt.Scanln(&moneydo)
 		var moneydolower = strings.ToLower(moneydo)
 		if moneydolower == "w" {
-			fmt.Println("How much?")
+			fmt.Println("You currently have", Pbfunds(), "gold in your account \n and you have", cfunds, "on you, how much would you like to withdraw?")
+			//gets how much they want to withdraw
+			var fundschoice float64
+			fmt.Scanln(&fundschoice)
+			//checks if they have enough money to make the withdraw
+			if fundschoice > Pbfunds() {
+				fmt.Println("You do not have", fundschoice, "in your account, get out and earn money!")
+				// else if fundschoice < Pbfunds(){
+				// 	fmt.Println("Ok here you go. ", name, "withdrew", fundschoice, "from their account")
+
+				// } else {
+				// 	fmt.Println("Do you know what numbers are?")
+				// }
+				//check to see if they acctually put in numbers
+				// } else if  fundschoice, err := strconv.ParseInt(userInput, 10, 0)
+				// 	if err != nil {
+				// } else if Numcheck() {
+				// 	fmt.Println("Do you know what numbers are?")
+				//} else if Numcheck(fundschoice) == nil {
+				// fmt.Println("Do you know what numbers are?")
+			} else if fundschoice <= Pbfunds() {
+				fmt.Println("Ok here you go.", name, "withdrew", fundschoice, "gold from their account")
+				//Withdraw(name, fundschoice, Pbfunds())
+				db.Exec("UPDATE bankaccount SET funds = $1 WHERE name = $2", Pbfunds()-fundschoice, name)
+				db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds+fundschoice, name)
+				fmt.Println("Currently holding", cfunds, "Gold")
+				// } else if Numcheck(err == nil) { //need to validate type
+				// 	fmt.Println("Please go figure out a proper amount then come back")
+			}
 		} else if moneydolower == "d" { //check both w and d to see if they have enough
-			fmt.Println("How much?")
+			fmt.Println("You currently have", Pbfunds(), "gold in your account \n and you have", cfunds, "on you, how much would you like to Deposit?")
+			//gets how much they want to withdraw
+			var fundschoice float64
+			fmt.Scanln(&fundschoice)
+			if fundschoice > cfunds {
+				fmt.Println("You do not have", fundschoice, "on you, you have", cfunds, "get out and earn money!")
+				//checks to see if they have enough funds on them
+				// if fundschoice > Pbfunds() {
+				// 	fmt.Println("You do not ha
+			} else if fundschoice <= cfunds {
+				fmt.Println("Ok", name, "deposited", fundschoice, "gold into their account")
+				//Withdraw(name, fundschoice, Pbfunds())
+				db.Exec("UPDATE bankaccount SET funds = $1 WHERE name = $2", Pbfunds()+fundschoice, name)
+				db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-fundschoice, name)
+				fmt.Println("Currently holding", cfunds, "Gold")
+			}
 		} else {
 			fmt.Println("[W]ithdraw [D]eposit please")
+			Bank()
 		}
 	} else {
 		fmt.Println("Welcome", name, "I see you do not have an account with us would you like to set one up? [Y] or [N]")
@@ -84,7 +131,7 @@ func Bank() {
 		//fmt.Println(acreatelower)
 		if acreatelower == "y" {
 			fmt.Println("Alright let me create that for you.\nJust so you know if you store your gold at the bank you will be unable to bet it \nhowever you wont lose it if you are beaten.")
-			//add new account with a 0 balance under the player name
+			//add new account with a 10.5 gold balance under the player name
 			db.Exec("insert into bankaccount (name, funds) values ($1, 10.5)", name)
 			//check table
 			//getAll(db)
@@ -100,26 +147,36 @@ func Bank() {
 	}
 }
 
-//notes and references
+// Pbfunds prints the players bank funds
+func Pbfunds() float64 {
+	datasource := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+		host, port, user, password, dbname)
+	db, err := sql.Open("postgres", datasource)
+	defer db.Close()
+	if err != nil {
+		panic(err)
+	}
+	name := name.GetName()
+	var funds float64
+	rows, err := db.Query("SELECT name, funds FROM bankaccount where name = $1;", name)
+	if err != nil {
+		// handle err
+		log.Fatal(err)
+	}
+	defer rows.Close()
+	for rows.Next() {
+		err := rows.Scan(&name, &funds)
+		if err != nil {
+			log.Fatal(err)
+		}
+		//check to be sure its working
+		//fmt.Println(funds)
+	}
+	return funds
+}
 
-// // Fund is a simple struct representing a balance
-// type Fund struct {
-// 	balance float64
-// }
-
-// // NewFund is a basic constructor for Fund struct
-// func NewFund(i float64) *Fund {
-// 	return &Fund{
-// 		balance: i,
-// 	}
-// }
-
-// // Balance returns the current balance of a Fund
-// func (f *Fund) Balance() float64 {
-// 	return f.balance
-// }
-
-// // Withdraw removes an amount from the current balance of a Fund
-// func (f *Fund) Withdraw(i float64) {
-// 	f.balance -= i
+//Numcheck checks to see if the user input was a number or not
+// func Numcheck(s string) bool {
+// 	fundschoice, err := strconv.ParseFloat(s, 64)
+// 	return err == nil
 // }

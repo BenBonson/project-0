@@ -3,11 +3,15 @@ package shop
 import (
 	"fmt"
 	"strings"
+
+	"github.com/190930-UTA-CW-Go/project-0/cfunds"
 )
 
 //Shop for when the player is at the shop
 func Shop() {
 	fmt.Println("Welcome to the Shop. See anything you like?")
+	cfunds := cfunds.Cfunds()
+	fmt.Println("Currently holding", cfunds, "Gold")
 	//array with options
 	var inventory [7]string
 	inventory[0] = "[P]late Mail 30g \n" //add descritpions once they do stuff
@@ -20,7 +24,8 @@ func Shop() {
 	fmt.Println(inventory)
 	var moneyspend string
 	fmt.Scanln(&moneyspend)
-	var moneyspendlower = strings.ToLower(moneyspend) //need to sheck if they can afford it
+	var moneyspendlower = strings.ToLower(moneyspend)
+	//need to Check if they can afford it and subtract currently held funds
 	if moneyspendlower == "p" {
 		fmt.Println("Aquired Plate Mail")
 		fmt.Println("Thanks for the purchase now get out so I can spend my new gold.")
@@ -44,11 +49,4 @@ func Shop() {
 	} else {
 		fmt.Println("Clearly you must have hit your head in the arena \ncause I have no idea what your going on about just get out and relearn how to speak.")
 	}
-	// } else if moneyspendlower == "e" {
-	// 	//do nothing
-	// } else {
-
-	// }
 }
-
-//add ability to actualy buy stuff
