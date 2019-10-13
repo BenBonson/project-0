@@ -39,7 +39,9 @@ func Bank() {
 	if err != nil {
 		panic(err)
 	}
+
 	name := name.GetName()
+
 	if Account() {
 		fmt.Println("Welcome back", name, "how can I help you? [W]ithdraw [D]eposit") //add options deposit withdraw
 		var moneydo string

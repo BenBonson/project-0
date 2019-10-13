@@ -39,6 +39,9 @@ func main() {
 	Nav()
 	//navigation.Nav()
 
+	//check table
+	getAll(db)
+
 	//Current location Home
 	// var clocal string
 	// clocal == "H"
@@ -106,7 +109,7 @@ func Nav() string {
 		// fmt.Scanln(&tolocation)
 		// var tolocationlower = strings.ToLower(tolocation)
 	}
-	return "nope"
+	return "nope" //Apparently I need a return but don't really want to use it
 }
 
 //getAll
