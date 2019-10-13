@@ -69,7 +69,7 @@ func Bank() {
 		var moneydolower = strings.ToLower(moneydo)
 		if moneydolower == "w" {
 			fmt.Println("How much?")
-		} else if moneydolower == "d" {
+		} else if moneydolower == "d" { //check both w and d to see if they have enough
 			fmt.Println("How much?")
 		} else {
 			fmt.Println("[W]ithdraw [D]eposit please")
@@ -83,13 +83,13 @@ func Bank() {
 		//check for user input
 		//fmt.Println(acreatelower)
 		if acreatelower == "y" {
-			fmt.Println("Alright let me create that for you. Just so you know if you store your gold at the bank you will be unable to bet it however you wont lose it if you are beaten.")
+			fmt.Println("Alright let me create that for you.\nJust so you know if you store your gold at the bank you will be unable to bet it \nhowever you wont lose it if you are beaten.")
 			//add new account with a 0 balance under the player name
 			db.Exec("insert into bankaccount (name, funds) values ($1, 10.5)", name)
 			//check table
 			//getAll(db)
 		} else {
-			fmt.Println("Well, good luck with that. Just so you know if you store your gold at the bank you will be unable to bet it \n however you wont lose it if you are beaten.")
+			fmt.Println("Well, good luck with that. \nJust so you know if you store your gold at the bank you will be unable to bet it \nhowever you wont lose it if you are beaten.")
 			/*
 				var tolocation string
 				fmt.Println("Where would you like to go?. \n [S]hop [A]rena [B]ank")

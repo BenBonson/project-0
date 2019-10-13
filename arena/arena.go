@@ -17,3 +17,5 @@ func Arena() {
 		fmt.Println("Get lost then and stop wasting my time!")
 	}
 }
+
+//array of fighters and stats

@@ -168,3 +168,59 @@ check with docker ps
 // if d() {
 //     fmt.Printf("true")
 // }
+
+# Notes and unused code from main
+
+	//navigation.Nav()
+
+	//check table
+	//getAll(db)
+
+	//Current location Home
+	// var clocal string
+	// clocal == "H"
+	//add locations to go, shop arena bank
+
+	//call the func bank
+	//bank
+	//location = bank or something would probably be cleaner
+	//check for bank account
+
+	//make a func that runs bank   TRY SWITCH STATMENTS
+
+	// fmt.Scanln(&tolocation)
+	// var tolocationlower = strings.ToLower(tolocation)
+
+	//Notes and references
+
+	// initbalance := flag.Float64("balance", 100, "default balance")
+	// name := flag.String("name", "Mehrab", "default name")
+	// flag.Parse()
+
+	// fmt.Println(*name)
+	// fund := fund.NewFund(*initbalance)
+
+	// lock := make(chan bool)
+
+	// go func() {
+	// 	fund.Withdraw(50)
+	// 	lock <- false
+	// }()
+
+	// //fmt.Println("Hit enter to continue")
+	// //fmt.Scanln()
+
+	// <-lock
+	// fund.Withdraw(45)
+
+	// fmt.Println(fund.Balance())
+
+	//Current problems,
+	//Serial the id
+	//print out database
+	//does the database stay changes or not
+
+	// var tolocation string
+		// fmt.Println("Sorry not an option please choose [S]hop [A]rena [B]ank")
+		// fmt.Scanln(&tolocation)
+		// var tolocationlower = strings.ToLower(tolocation)
