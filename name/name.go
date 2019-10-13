@@ -12,7 +12,8 @@ func GetName() string {
 	//get player name
 	//var Name string
 	if len(Name) > 0 {
-		fmt.Println("Sup")
+		//check to see if it runs
+		//fmt.Println("Sup")
 	} else {
 		fmt.Println("Hello adventurer please state your name.")
 		fmt.Scanln(&Name)

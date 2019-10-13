@@ -10,8 +10,10 @@ import (
 
 	//imports the db
 
+	"github.com/190930-UTA-CW-Go/project-0/arena"
 	"github.com/190930-UTA-CW-Go/project-0/bank"
 	"github.com/190930-UTA-CW-Go/project-0/name"
+	"github.com/190930-UTA-CW-Go/project-0/shop"
 
 	//"github.com/190930-UTA-CW-Go/project-0/navigation"
 	_ "github.com/lib/pq"
@@ -36,11 +38,16 @@ func main() {
 	}
 	//check table
 	//getAll(db)
-	Nav()
+
+	//endless loop
+	for {
+		Nav()
+	}
+
 	//navigation.Nav()
 
 	//check table
-	getAll(db)
+	//getAll(db)
 
 	//Current location Home
 	// var clocal string
@@ -97,9 +104,9 @@ func Nav() string {
 
 	switch tolocationlower {
 	case "s":
-		fmt.Println("Sorry shop not avalible yet")
+		shop.Shop()
 	case "a":
-		fmt.Println("Sorry arena not avalible yet")
+		arena.Arena()
 	case "b":
 		bank.Bank()
 	default:

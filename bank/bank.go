@@ -19,6 +19,15 @@ const (
 
 // Account bool Checks for account
 func Account() bool {
+	datasource := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+		host, port, user, password, dbname)
+	db, err := sql.Open("postgres", datasource)
+	defer db.Close()
+	if err != nil {
+		panic(err)
+	}
+	//for name in database scan through with range
+
 	//scan through database for name
 	// if {
 	// 	name is in the database
@@ -26,6 +35,7 @@ func Account() bool {
 	// } else {
 	//	var account = false
 	//}
+
 	var account = false
 	return account
 }
