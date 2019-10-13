@@ -47,3 +47,124 @@ cd into db
 docker stop bankaccount
 docker rm bankaccount
 check with docker ps
+
+# Some of the attempts and reference material used to recognise if the player already has an account
+
+//Account bool Checks for account
+// func Account(db *sql.DB, username string) bool {
+// 	nameuser := name.GetName()
+// 	sqlStatement := `SELECT name, funds FROM users WHERE name=$1;`
+// 	var funds float64
+// 	var name string
+// 	var account bool
+// 	// Replace 3 with an ID from your database or another random
+// 	// value to test the no rows use case.
+// 	row := db.QueryRow(sqlStatement, nameuser)
+// 	//err := row.Scan(&name, &funds); err {
+// 	// case sql.ErrNoRows:
+// 	// 	fmt.Println("No rows were returned!")
+// 	// if row := nil {
+// 	if rowExists("SELECT id FROM feed_items WHERE url=$1", nameuser)
+// 		var account true
+// 		//fmt.Println(name, funds)
+// 	} else {
+// 		var account false
+// 	}
+// 	return account
+// }
+
+// func Account(query string, args ...interface{}) bool {
+// 	var exists bool
+// 	query = fmt.Sprintf("SELECT exists (%s)", query)
+// 	err := db.QueryRow(query, args...).Scan(&exists)
+// 	if err != nil && err != sql.ErrNoRows {
+// 		glog.Fatalf("error checking if row exists '%s' %v", args, err)
+// 	}
+// 	return exists
+// }
+
+
+// if rows != nil {
+	// 	return true
+	// } else {
+	// 	return false
+	// }
+
+// // Pokedex is a directory of Pokemon
+// type Account struct {
+// 	directory []bankaccount
+// }
+
+// // List will print out all Pokemon in the directory
+// func (b *bankaccount) List() {
+// 	for _, bankaccount := range b.directory {
+// 		fmt.Println(bankaccount.name, bankaccount.funds)
+// 	}
+// }
+
+//Account checks for player bank account
+// func Account(name string) bool {
+// 	datasource := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+// 		host, port, user, password, dbname)
+// 	db, err := sql.Open("postgres", datasource)
+// 	defer db.Close()
+// 	if err != nil {
+// 		panic(err)
+// 	}
+// 	var row *sql.Row
+// 	row = db.QueryRow("SELECT name FROM bankaccount WHERE name = $1", name)
+//}
+
+// Account bool Checks for account
+// func Account() bool {
+// 	datasource := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+// 		host, port, user, password, dbname)
+// 	db, err := sql.Open("postgres", datasource)
+// 	defer db.Close()
+// 	if err != nil {
+// 		panic(err)
+// 	}
+
+// name := name.GetName()
+//for name in database scan through with range
+// for dbname, datasource := range datasource{
+// 	if name
+// }
+
+// func UserExists(db * sql.DB, username string) bool {
+// 	sqlStmt := `SELECT username FROM userinfo WHERE username = ?`
+// 	err := db.QueryRow(sqlStmt, username).Scan(&username)
+// 	if err != nil {
+// 		if err != sql.ErrNoRows {
+// 			// a real error happened! you should change your function return
+// 			// to "(bool, error)" and return "false, err" here
+// 			log.Print(err)
+// 		}
+
+// 		return false
+// 	}
+
+// 	return true
+// }
+
+//scan through database for name
+// if {
+// 	name is in the database
+//	var account = true
+// } else {
+//	var account = false
+//}
+
+// kinda working
+// 	var account = false
+// 	return account
+// }
+
+// func d() bool {
+//     var e bool
+//     return e
+// }
+
+// if d() {
+//     fmt.Printf("true")
+// }

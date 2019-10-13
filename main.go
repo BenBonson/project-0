@@ -42,6 +42,7 @@ func main() {
 	//endless loop
 	for {
 		Nav()
+		//getAll(db)
 	}
 
 	//navigation.Nav()

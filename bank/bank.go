@@ -3,6 +3,7 @@ package bank
 import (
 	"database/sql"
 	"fmt"
+	"log"
 	"strings"
 
 	"github.com/190930-UTA-CW-Go/project-0/name"
@@ -17,7 +18,7 @@ const (
 	dbname   = "postgres"
 )
 
-// Account bool Checks for account
+//Account checks for user account
 func Account() bool {
 	datasource := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
 		host, port, user, password, dbname)
@@ -26,18 +27,27 @@ func Account() bool {
 	if err != nil {
 		panic(err)
 	}
-	//for name in database scan through with range
-
-	//scan through database for name
-	// if {
-	// 	name is in the database
-	//	var account = true
-	// } else {
-	//	var account = false
-	//}
-
-	var account = false
-	return account
+	name := name.GetName()
+	var funds float64
+	rows, err := db.Query("SELECT name, funds FROM bankaccount where name = $1;", name)
+	if err != nil {
+		// handle err
+		log.Fatal(err)
+	}
+	defer rows.Close()
+	for rows.Next() {
+		err := rows.Scan(&name, &funds)
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(name, funds)
+		return true
+	}
+	err = rows.Err()
+	if err != nil {
+		log.Fatal(err)
+	}
+	return false
 }
 
 //Bank starts when player enters the Bank
@@ -52,7 +62,7 @@ func Bank() {
 
 	name := name.GetName()
 
-	if Account() {
+	if Account() == true {
 		fmt.Println("Welcome back", name, "how can I help you? [W]ithdraw [D]eposit") //add options deposit withdraw
 		var moneydo string
 		fmt.Scanln(&moneydo)
@@ -73,16 +83,11 @@ func Bank() {
 		//check for user input
 		//fmt.Println(acreatelower)
 		if acreatelower == "y" {
-			//change bank account to true
-			//bank.Account() account = true
 			fmt.Println("Alright let me create that for you. Just so you know if you store your gold at the bank you will be unable to bet it however you wont lose it if you are beaten.")
 			//add new account with a 0 balance under the player name
 			db.Exec("insert into bankaccount (name, funds) values ($1, 10.5)", name)
 			//check table
 			//getAll(db)
-			/*
-				loop to case b again
-			*/
 		} else {
 			fmt.Println("Well, good luck with that. Just so you know if you store your gold at the bank you will be unable to bet it \n however you wont lose it if you are beaten.")
 			/*
@@ -94,15 +99,6 @@ func Bank() {
 		}
 	}
 }
-
-// func d() bool {
-//     var e bool
-//     return e
-// }
-
-// if d() {
-//     fmt.Printf("true")
-// }
 
 //notes and references
 
