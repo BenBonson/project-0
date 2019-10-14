@@ -122,7 +122,7 @@ func Bank() {
 			Bank()
 		}
 	} else {
-		fmt.Println("Welcome", name, "I see you do not have an account with us would you like to set one up? [Y] or [N]")
+		fmt.Println("Welcome", name, "Thanks for playing my game, I see you do not have an account with us would you like to set one up? [Y] or [N]")
 		//create account
 		var acreate string
 		fmt.Scanln(&acreate)
@@ -131,12 +131,12 @@ func Bank() {
 		//fmt.Println(acreatelower)
 		if acreatelower == "y" {
 			fmt.Println("Alright let me create that for you.\nJust so you know if you store your gold at the bank you will be unable to bet it \nhowever you wont lose it if you are beaten.")
-			//add new account with a 10.5 gold balance under the player name
-			db.Exec("insert into bankaccount (name, funds) values ($1, 10.5)", name)
+			//add new account with a 10.5 gold balance under the player name .......remove cfunds
+			db.Exec("INSERT INTO bankaccount (name, funds, cfunds, health, attack) values ($1, 10.5, 0, 30, 2)", name)
 			//check table
 			//getAll(db)
 		} else {
-			fmt.Println("Well, good luck with that. \nJust so you know if you store your gold at the bank you will be unable to bet it \nhowever you wont lose it if you are beaten.")
+			fmt.Println("Well, good luck with that. \nJust so you know if you dont have an account at the bank you will be UNABLE PLAY!!!")
 			/*
 				var tolocation string
 				fmt.Println("Where would you like to go?. \n [S]hop [A]rena [B]ank")
@@ -146,6 +146,20 @@ func Bank() {
 		}
 	}
 }
+
+//remove this func use to check if table is working
+// func getAll(db *sql.DB) {
+// 	rows, _ := db.Query("SELECT * FROM bankaccount")
+// 	for rows.Next() {
+// 		var name string
+// 		var funds float64
+// 		var cfunds float64
+// 		var health int
+// 		var attack int
+// 		rows.Scan(&name, &funds, &cfunds, &health, &attack)
+// 		fmt.Println(name, funds, cfunds, health, attack)
+// 	}
+// }
 
 // Pbfunds prints the players bank funds
 func Pbfunds() float64 {

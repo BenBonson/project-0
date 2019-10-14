@@ -40,6 +40,8 @@ func main() {
 	//check table
 	//getAll(db)
 
+	name.GetName()
+	bank.Bank()
 	//endless loop
 	for {
 		Nav()
@@ -74,11 +76,13 @@ func Nav() string {
 func getAll(db *sql.DB) {
 	rows, _ := db.Query("SELECT * FROM bankaccount")
 	for rows.Next() {
-		var id int
 		var name string
 		var funds float64
-		rows.Scan(&id, &name, &funds)
-		fmt.Println(id, name, funds)
+		var cfunds float64
+		var health int
+		var attack int
+		rows.Scan(&name, &funds, &cfunds, &health, &attack)
+		fmt.Println(name, funds, cfunds, health, attack)
 	}
 }
 

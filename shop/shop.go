@@ -7,6 +7,7 @@ import (
 
 	"github.com/190930-UTA-CW-Go/project-0/cfunds"
 	"github.com/190930-UTA-CW-Go/project-0/name"
+	"github.com/190930-UTA-CW-Go/project-0/stats"
 )
 
 const (
@@ -29,15 +30,18 @@ func Shop() {
 	name := name.GetName()
 	fmt.Println("Welcome to the Shop. See anything you like?")
 	cfunds := cfunds.Cfunds()
-	fmt.Println("Currently holding", cfunds, "Gold")
+	fmt.Println("Currently holding", cfunds, "Gold.")
+	pattack := stats.Pattack()
+	phealth := stats.Phealth()
+	fmt.Println("Current stats are", pattack, "attack and", phealth, "health.")
 	//array with options
 	var inventory [7]string
-	inventory[0] = "[P]late Mail 30g \n" //add descritpions once they do stuff
-	inventory[1] = "[S]hort Sword 10g \n"
-	inventory[2] = "[L]ong Sword 30g \n"
-	inventory[3] = "[G]auntlets 15g \n"
-	inventory[4] = "[B]oots 5g \n"
-	inventory[5] = "[C]arrot of Death 300g \n"
+	inventory[0] = "[P]late Mail 30g - adds 60 hp\n" //add descritpions once they do stuff
+	inventory[1] = "[S]hort Sword 10g - adds 2 attack\n"
+	inventory[2] = "[L]ong Sword 30g - adds 6 attack\n"
+	inventory[3] = "[G]auntlets 15g - adds 25 hp\n"
+	inventory[4] = "[B]oots 5g - adds 5 hp\n"
+	inventory[5] = "[C]arrot of Death 300g - adds 900 attack\n"
 	inventory[6] = "[E]xit shop \n"
 	fmt.Println(inventory)
 	var moneyspend string
@@ -48,6 +52,7 @@ func Shop() {
 		if 30 < cfunds {
 			fmt.Println("Aquired Plate Mail")
 			db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-30, name)
+			db.Exec("UPDATE bankaccount SET health = $1 WHERE name = $2", phealth+60, name)
 			fmt.Println("Thanks for the purchase.")
 			Shop()
 		} else {
@@ -58,6 +63,7 @@ func Shop() {
 		if 10 < cfunds {
 			fmt.Println("Aquired Short sword")
 			db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-10, name)
+			db.Exec("UPDATE bankaccount SET health = $1 WHERE name = $2", pattack+2, name)
 			fmt.Println("Thanks for the purchase.")
 			Shop()
 		} else {
@@ -68,6 +74,7 @@ func Shop() {
 		if 30 < cfunds {
 			fmt.Println("Aquired Long sword")
 			db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-30, name)
+			db.Exec("UPDATE bankaccount SET health = $1 WHERE name = $2", pattack+6, name)
 			fmt.Println("Thanks for the purchase.")
 			Shop()
 		} else {
@@ -78,6 +85,7 @@ func Shop() {
 		if 15 < cfunds {
 			fmt.Println("Aquired Gauntlets")
 			db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-15, name)
+			db.Exec("UPDATE bankaccount SET health = $1 WHERE name = $2", phealth+25, name)
 			fmt.Println("Thanks for the purchase.")
 			Shop()
 		} else {
@@ -88,6 +96,7 @@ func Shop() {
 		if 5 < cfunds {
 			fmt.Println("Aquired Boots")
 			db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-5, name)
+			db.Exec("UPDATE bankaccount SET health = $1 WHERE name = $2", phealth+5, name)
 			fmt.Println("Thanks for the purchase.")
 			Shop()
 		} else {
@@ -98,6 +107,7 @@ func Shop() {
 		if 300 < cfunds {
 			fmt.Println("Aquired Carrot of Death")
 			db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-300, name)
+			db.Exec("UPDATE bankaccount SET health = $1 WHERE name = $2", pattack+900, name)
 			fmt.Println("Thanks for the purchase.")
 			Shop()
 		} else {
