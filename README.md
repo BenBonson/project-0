@@ -9,6 +9,14 @@ Insert project description here.
 - [] Story
 
 # Instructions
+Code to get postgres
+cd db
+docker build -t bankaccount .
+docker run --name bankaccount -d -p 5432:5432 bankaccount
+
+
+When Playing input your name with no spaces and creat an account when prompted
+
 Insert environment, build, and execution documentation here.
 
 
