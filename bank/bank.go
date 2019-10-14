@@ -96,7 +96,6 @@ func Bank() {
 				//Withdraw(name, fundschoice, Pbfunds())
 				db.Exec("UPDATE bankaccount SET funds = $1 WHERE name = $2", Pbfunds()-fundschoice, name)
 				db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds+fundschoice, name)
-				fmt.Println("Currently holding", cfunds, "Gold")
 				// } else if Numcheck(err == nil) { //need to validate type
 				// 	fmt.Println("Please go figure out a proper amount then come back")
 			}
@@ -115,7 +114,6 @@ func Bank() {
 				//Withdraw(name, fundschoice, Pbfunds())
 				db.Exec("UPDATE bankaccount SET funds = $1 WHERE name = $2", Pbfunds()+fundschoice, name)
 				db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-fundschoice, name)
-				fmt.Println("Currently holding", cfunds, "Gold")
 			}
 		} else {
 			fmt.Println("[W]ithdraw [D]eposit please")
@@ -130,7 +128,7 @@ func Bank() {
 		//check for user input
 		//fmt.Println(acreatelower)
 		if acreatelower == "y" {
-			fmt.Println("Alright let me create that for you.\nJust so you know if you store your gold at the bank you will be unable to bet it \nhowever you wont lose it if you are beaten.")
+			fmt.Println("Alright let me create that for you.\nJust so you know if you store your gold at the bank you will be unable to bet it \nhowever you wont lose it if you are beaten. Also you get 10.5 gold for making an account.")
 			//add new account with a 10.5 gold balance under the player name .......remove cfunds
 			db.Exec("INSERT INTO bankaccount (name, funds, cfunds, health, attack) values ($1, 10.5, 0, 30, 2)", name)
 			//check table
@@ -159,6 +157,16 @@ func Bank() {
 // 		rows.Scan(&name, &funds, &cfunds, &health, &attack)
 // 		fmt.Println(name, funds, cfunds, health, attack)
 // 	}
+// }
+
+// //Checkint checks if the user input is an int
+// func Checkint(s string) bool {
+// 	for _, c := range s {
+// 		if !unicode.IsDigit(c) {
+// 			return false
+// 		}
+// 	}
+// 	return true
 // }
 
 // Pbfunds prints the players bank funds

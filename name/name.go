@@ -15,7 +15,7 @@ func GetName() string {
 		//check to see if it runs
 		//fmt.Println("Sup")
 	} else {
-		fmt.Println("Hello adventurer please state your name no spaces.")
+		fmt.Println("Hello adventurer please state your name no spaces dashes or underscores.")
 		fmt.Scanln(&Name)
 		// in := bufio.NewReader(os.Stdin)
 		// Name, _ := in.ReadString('\n')

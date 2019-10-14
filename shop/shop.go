@@ -36,14 +36,17 @@ func Shop() {
 	fmt.Println("Current stats are", pattack, "attack and", phealth, "health.")
 	//array with options
 	var inventory [7]string
-	inventory[0] = "[P]late Mail 30g - adds 60 hp\n" //add descritpions once they do stuff
-	inventory[1] = "[S]hort Sword 10g - adds 2 attack\n"
-	inventory[2] = "[L]ong Sword 30g - adds 6 attack\n"
-	inventory[3] = "[G]auntlets 15g - adds 25 hp\n"
-	inventory[4] = "[B]oots 5g - adds 5 hp\n"
-	inventory[5] = "[C]arrot of Death 300g - adds 900 attack\n"
-	inventory[6] = "[E]xit shop \n"
-	fmt.Println(inventory)
+	inventory[0] = "[P]late Mail 30g - adds 60 hp" //add descritpions once they do stuff
+	inventory[1] = "[S]hort Sword 10g - adds 2 attack"
+	inventory[2] = "[L]ong Sword 30g - adds 6 attack"
+	inventory[3] = "[G]auntlets 15g - adds 25 hp"
+	inventory[4] = "[B]oots 5g - adds 5 hp"
+	inventory[5] = "[C]arrot of Death 300g - adds 900 attack"
+	inventory[6] = "[E]xit shop"
+	for i, s := range inventory {
+		fmt.Println(i, s)
+	}
+	//fmt.Println(inventory)
 	var moneyspend string
 	fmt.Scanln(&moneyspend)
 	var moneyspendlower = strings.ToLower(moneyspend)
