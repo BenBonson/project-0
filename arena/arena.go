@@ -23,6 +23,11 @@ func Arena() {
 	}
 }
 
+//to do
+
 //array of fighters and stats
 
-//acctual fights or random generator
+//acctual fights w/health, attack, energy and actions = attack block rest
+
+//add bet functionality, loss penalty, win reward
+//check and be sure they are putting in numbers

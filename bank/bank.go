@@ -180,3 +180,6 @@ func Pbfunds() float64 {
 // 	fundschoice, err := strconv.ParseFloat(s, 64)
 // 	return err == nil
 // }
+
+//to do
+//check and be sure that they are putting in numbers

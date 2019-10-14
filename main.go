@@ -53,7 +53,7 @@ func Nav() string {
 	var tolocation string
 	cfunds := cfunds.Cfunds()
 	fmt.Println("Currently holding", cfunds, "Gold")
-	fmt.Println("Where would you like to go", name, "? \n [S]hop [A]rena [B]ank")
+	fmt.Println("Where would you like to go", name, "? \n[S]hop [A]rena [B]ank")
 	fmt.Scanln(&tolocation)
 	var tolocationlower = strings.ToLower(tolocation)
 
@@ -81,3 +81,5 @@ func getAll(db *sql.DB) {
 		fmt.Println(id, name, funds)
 	}
 }
+
+//done

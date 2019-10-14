@@ -1,14 +1,32 @@
 package shop
 
 import (
+	"database/sql"
 	"fmt"
 	"strings"
 
 	"github.com/190930-UTA-CW-Go/project-0/cfunds"
+	"github.com/190930-UTA-CW-Go/project-0/name"
+)
+
+const (
+	host     = "localhost"
+	port     = 5432
+	user     = "postgres"
+	password = "postgres"
+	dbname   = "postgres"
 )
 
 //Shop for when the player is at the shop
 func Shop() {
+	datasource := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+		host, port, user, password, dbname)
+	db, err := sql.Open("postgres", datasource)
+	defer db.Close()
+	if err != nil {
+		panic(err)
+	}
+	name := name.GetName()
 	fmt.Println("Welcome to the Shop. See anything you like?")
 	cfunds := cfunds.Cfunds()
 	fmt.Println("Currently holding", cfunds, "Gold")
@@ -27,26 +45,70 @@ func Shop() {
 	var moneyspendlower = strings.ToLower(moneyspend)
 	//need to Check if they can afford it and subtract currently held funds
 	if moneyspendlower == "p" {
-		fmt.Println("Aquired Plate Mail")
-		fmt.Println("Thanks for the purchase now get out so I can spend my new gold.")
+		if 30 < cfunds {
+			fmt.Println("Aquired Plate Mail")
+			db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-30, name)
+			fmt.Println("Thanks for the purchase.")
+			Shop()
+		} else {
+			fmt.Println("You lack the funds buddy")
+			Shop()
+		}
 	} else if moneyspendlower == "s" {
-		fmt.Println("Aquired Short sword")
-		fmt.Println("Thanks for the purchase now get out so I can spend my new gold.")
+		if 10 < cfunds {
+			fmt.Println("Aquired Short sword")
+			db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-10, name)
+			fmt.Println("Thanks for the purchase.")
+			Shop()
+		} else {
+			fmt.Println("You lack the funds buddy")
+			Shop()
+		}
 	} else if moneyspendlower == "s" {
-		fmt.Println("Aquired Long sword")
-		fmt.Println("Thanks for the purchase now get out so I can spend my new gold.")
+		if 30 < cfunds {
+			fmt.Println("Aquired Long sword")
+			db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-30, name)
+			fmt.Println("Thanks for the purchase.")
+			Shop()
+		} else {
+			fmt.Println("You lack the funds buddy")
+			Shop()
+		}
 	} else if moneyspendlower == "g" {
-		fmt.Println("Aquired Gauntlets")
-		fmt.Println("Thanks for the purchase now get out so I can spend my new gold.")
+		if 15 < cfunds {
+			fmt.Println("Aquired Gauntlets")
+			db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-15, name)
+			fmt.Println("Thanks for the purchase.")
+			Shop()
+		} else {
+			fmt.Println("You lack the funds buddy")
+			Shop()
+		}
 	} else if moneyspendlower == "b" {
-		fmt.Println("Aquired Boots")
-		fmt.Println("Thanks for the purchase now get out so I can spend my new gold.")
+		if 5 < cfunds {
+			fmt.Println("Aquired Boots")
+			db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-5, name)
+			fmt.Println("Thanks for the purchase.")
+			Shop()
+		} else {
+			fmt.Println("You lack the funds buddy")
+			Shop()
+		}
 	} else if moneyspendlower == "c" {
-		fmt.Println("Aquired Carrot of Death")
-		fmt.Println("Thanks for the purchase now get out so I can spend my new gold.")
+		if 300 < cfunds {
+			fmt.Println("Aquired Carrot of Death")
+			db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-300, name)
+			fmt.Println("Thanks for the purchase.")
+			Shop()
+		} else {
+			fmt.Println("You lack the funds buddy")
+			Shop()
+		}
 	} else if moneyspendlower == "e" {
 		fmt.Println("Thats too bad.")
 	} else {
 		fmt.Println("Clearly you must have hit your head in the arena \ncause I have no idea what your going on about just get out and relearn how to speak.")
 	}
 }
+
+//add effects to the equipment and clean up text printout
