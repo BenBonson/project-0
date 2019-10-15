@@ -1,12 +1,33 @@
 # Project 0 Text Adventure
 ## Ben Bonson
-Insert project description here.
+This is a  text adventure game with 3 locations to go to and interact with.
 
 # User Stories
-- [x] List
-- [] Each
-- [] User
-- [] Story
+Created main.go
+Prompted the user for their name
+Created basics for navigation
+Created basics for bank
+Created way too many if statments
+Created navigation.go and moved the navigation out of main
+Created name.go and moved name prompt
+Created bank.go and moved bank function
+Linked Nav, main and Bank together
+Created database
+Created account function in bank to check for name in database
+Commented out Navigation.go and moved function to main
+Created non-functioning shop.go and arena.go
+Filled the shop with goods
+Added prompts to arena
+Changed database to track player on hand money
+Made bank.go withdraw and deposite work, taking into accunt money on hand and in the bank
+Added prices to Shop and made player lose money upon purchase
+Added stats to the database and to user upon account creation
+Force player to bank inorder to get account
+Made shop fully functional by making player stats change upon purchase
+Arena now picks a random fighter from database to fight player
+Arena fights now work by comparing player stats to opponents, higher wins
+Players now win or lose mony after fight
+Fixed error when people put in letters when prompted for numbers
 
 # Instructions
 Code to get postgres
@@ -15,9 +36,9 @@ docker build -t bankaccount .
 docker run --name bankaccount -d -p 5432:5432 bankaccount
 
 
-When Playing input your name with no spaces and creat an account when prompted
+When Playing input your name with no spaces and create an account when prompted
 
-Insert environment, build, and execution documentation here.
+Have fun and don't take it seriously
 
 
 # Incase go deletes some of my imports
@@ -290,3 +311,44 @@ check with docker ps
 //     var name string
 //     fmt.Println("What is your name?")
 //     name, _ := reader.readString("\n")
+
+// //Name is player name
+// var Name string
+
+// //GetName gets player name and returns it
+// func GetName() string {
+// 	//get player name
+// 	//var Name string
+// 	if len(Name) > 0 {
+// 		//check to see if it runs
+// 		//fmt.Println("Sup")
+// 	} else {
+// 		fmt.Println("Hello adventurer please state your name.")
+// 		// // String()
+// 		// reader := bufio.NewReader(os.Stdin)
+// 		scanner := bufio.NewScanner(os.Stdin)
+// 		scanner.Scan() // use `for scanner.Scan()` to keep reading
+// 		Name := scanner.Text()
+// 		fmt.Println("captured:", &Name)
+// 	}
+// 	fmt.Println("WTF")
+// 	return Name
+// }
+
+//Fname, err := strconv.Atoi(input)
+// input, _ := reader.ReadString('\n')
+// input = strings.TrimSuffix(input, "\n")
+
+//String Reads user input past a space
+// func String() string {
+// 	reader := bufio.NewReader(os.Stdin)
+// 	bytes, _, _ := reader.ReadLine()
+// 	fmt.Println(string(bytes))
+// 	return string(bytes)
+// }
+
+// func String() {
+// 	reader := bufio.NewReader(os.Stdin)
+// 	return
+// }
+
