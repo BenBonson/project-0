@@ -71,12 +71,29 @@ func Bank() {
 		fmt.Scanln(&moneydo)
 		var moneydolower = strings.ToLower(moneydo)
 		if moneydolower == "w" {
-			fmt.Println("You currently have", Pbfunds(), "gold in your account \n and you have", cfunds, "on you, how much would you like to withdraw?")
+			fmt.Println("You currently have", Pbfunds(), "gold in your account \nand you have", cfunds, "on you, how much would you like to withdraw?")
 			//gets how much they want to withdraw
 			var fundschoice float64
 			fmt.Scanln(&fundschoice)
+
+			// fmt.Scanln(&tolocation)
+			// var tolocationlower = strings.ToLower(tolocation)
+
+			// switch fundschoice {
+			// case "s":
+			// 	shop.Shop()
+			// case "a":
+			// 	arena.Arena()
+			// case "b":
+			// 	bank.Bank()
+			// default:
+			// 	fmt.Println("Sorry please choose a valid destination")
+			// }
+			// check := isNumeric(fundschoice)
 			//checks if they have enough money to make the withdraw
 			if fundschoice > Pbfunds() {
+				// switch fundschoice {
+				// case fundschoice > Pbfunds():
 				fmt.Println("You do not have", fundschoice, "in your account, get out and earn money!")
 				// else if fundschoice < Pbfunds(){
 				// 	fmt.Println("Ok here you go. ", name, "withdrew", fundschoice, "from their account")
@@ -91,16 +108,24 @@ func Bank() {
 				// 	fmt.Println("Do you know what numbers are?")
 				//} else if Numcheck(fundschoice) == nil {
 				// fmt.Println("Do you know what numbers are?")
-			} else if fundschoice <= Pbfunds() {
+			} else if fundschoice <= Pbfunds() && fundschoice != 0 {
+				//case fundschoice <= Pbfunds(): //try & fundschoice != 0
 				fmt.Println("Ok here you go.", name, "withdrew", fundschoice, "gold from their account")
 				//Withdraw(name, fundschoice, Pbfunds())
 				db.Exec("UPDATE bankaccount SET funds = $1 WHERE name = $2", Pbfunds()-fundschoice, name)
 				db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds+fundschoice, name)
 				// } else if Numcheck(err == nil) { //need to validate type
 				// 	fmt.Println("Please go figure out a proper amount then come back")
+			} else {
+				fmt.Println("That is not a valid number please get out and learn about math.") //keeps going to next input
+				//Bank()
+				// var fundschoice float64
+				// fmt.Scanln(&fundschoice)
+				Fail()
 			}
+
 		} else if moneydolower == "d" { //check both w and d to see if they have enough
-			fmt.Println("You currently have", Pbfunds(), "gold in your account \n and you have", cfunds, "on you, how much would you like to Deposit?")
+			fmt.Println("You currently have", Pbfunds(), "gold in your account \nand you have", cfunds, "on you, how much would you like to Deposit?")
 			//gets how much they want to withdraw
 			var fundschoice float64
 			fmt.Scanln(&fundschoice)
@@ -109,15 +134,23 @@ func Bank() {
 				//checks to see if they have enough funds on them
 				// if fundschoice > Pbfunds() {
 				// 	fmt.Println("You do not ha
-			} else if fundschoice <= cfunds {
+			} else if fundschoice <= cfunds && fundschoice != 0 {
 				fmt.Println("Ok", name, "deposited", fundschoice, "gold into their account")
 				//Withdraw(name, fundschoice, Pbfunds())
 				db.Exec("UPDATE bankaccount SET funds = $1 WHERE name = $2", Pbfunds()+fundschoice, name)
 				db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-fundschoice, name)
+			} else {
+				fmt.Println("That is not a valid number please get out and learn about math.") //keeps going to next input
+				//Bank()
+				// var fundschoice float64
+				// fmt.Scanln(&fundschoice)
+				Fail()
 			}
 		} else {
 			fmt.Println("[W]ithdraw [D]eposit please")
-			Bank()
+			// var moneydo string
+			// fmt.Scanln(&moneydo)
+			// var moneydolower = strings.ToLower(moneydo)
 		}
 	} else {
 		fmt.Println("Welcome", name, "Thanks for playing my game, I see you do not have an account with us would you like to set one up? [Y] or [N]")
@@ -169,6 +202,29 @@ func Bank() {
 // 	return true
 // }
 
+//isIntegral checks that the number given is a float64
+// func isIntegral(val float64) bool {
+// 	fmt.Println("Printing the thing")
+// 	return val == float64(int(val))
+// }
+
+// //isIntegral checks that the number given is a float64
+// func isNumeric(s string) bool {
+// 	_, err := strconv.ParseFloat(s, 64)
+// 	return err == nil
+// }
+
+// func IsNumeric(s float64) bool {
+// 	_, err := strconv.ParseFloat(64)
+// 	return err == nil
+// }
+
+// func IntCheck() bool {
+// 	if m, _ := regexp.MatchString("^[0-9]+$", r.Form.Get(fundschoice)); !m {
+// 		return false
+// 	}
+// }
+
 // Pbfunds prints the players bank funds
 func Pbfunds() float64 {
 	datasource := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
@@ -195,6 +251,12 @@ func Pbfunds() float64 {
 		//fmt.Println(funds)
 	}
 	return funds
+}
+
+//Fail removes bad user input
+func Fail() {
+	var fail string
+	fmt.Scanln(&fail)
 }
 
 //Numcheck checks to see if the user input was a number or not
