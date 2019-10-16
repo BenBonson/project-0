@@ -9,9 +9,9 @@ A Go CLI program. Update `Readme.md` with a name, a list of implemented and plan
     - [] `io`
     - [] `os`
     - [] `flag`
-    - [] `log`
+    - [x] `log`
     - [] `http`
-    - [] `testing`
+    - [x] `testing`
 
 ### Go language features
 - [x] primitive data types
@@ -19,11 +19,11 @@ A Go CLI program. Update `Readme.md` with a name, a list of implemented and plan
 - [] maps
 - [] struct
 - [] interface
-- [] functions/methods
-- [] unit tests/benchmarks
+- [x] functions/methods
+- [x] unit tests/benchmarks
 
 ### Functionality
-- [] CRUD - Create, Read, Update, Delete data
+- [x] CRUD - Create, Read, Update, Delete data
 - [] CLI - command-line args and/or event-driven text menus
 - [] Execute OS commands
 - [] Login - Authentication & Authorization
