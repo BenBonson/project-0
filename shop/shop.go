@@ -52,7 +52,7 @@ func Shop() {
 	var moneyspendlower = strings.ToLower(moneyspend)
 	//need to Check if they can afford it and subtract currently held funds
 	if moneyspendlower == "p" {
-		if 30 < cfunds {
+		if 30 <= cfunds {
 			fmt.Println("Aquired Plate Mail")
 			db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-30, name)
 			db.Exec("UPDATE bankaccount SET health = $1 WHERE name = $2", phealth+60, name)
@@ -63,7 +63,7 @@ func Shop() {
 			Shop()
 		}
 	} else if moneyspendlower == "s" {
-		if 10 < cfunds {
+		if 10 <= cfunds {
 			fmt.Println("Aquired Short sword")
 			db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-10, name)
 			db.Exec("UPDATE bankaccount SET health = $1 WHERE name = $2", pattack+2, name)
@@ -74,7 +74,7 @@ func Shop() {
 			Shop()
 		}
 	} else if moneyspendlower == "s" {
-		if 30 < cfunds {
+		if 30 <= cfunds {
 			fmt.Println("Aquired Long sword")
 			db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-30, name)
 			db.Exec("UPDATE bankaccount SET health = $1 WHERE name = $2", pattack+6, name)
@@ -85,7 +85,7 @@ func Shop() {
 			Shop()
 		}
 	} else if moneyspendlower == "g" {
-		if 15 < cfunds {
+		if 15 <= cfunds {
 			fmt.Println("Aquired Gauntlets")
 			db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-15, name)
 			db.Exec("UPDATE bankaccount SET health = $1 WHERE name = $2", phealth+25, name)
@@ -96,7 +96,7 @@ func Shop() {
 			Shop()
 		}
 	} else if moneyspendlower == "b" {
-		if 5 < cfunds {
+		if 5 <= cfunds {
 			fmt.Println("Aquired Boots")
 			db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-5, name)
 			db.Exec("UPDATE bankaccount SET health = $1 WHERE name = $2", phealth+5, name)
@@ -107,7 +107,7 @@ func Shop() {
 			Shop()
 		}
 	} else if moneyspendlower == "c" {
-		if 300 < cfunds {
+		if 300 <= cfunds {
 			fmt.Println("Aquired Carrot of Death")
 			db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-300, name)
 			db.Exec("UPDATE bankaccount SET health = $1 WHERE name = $2", pattack+900, name)
