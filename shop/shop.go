@@ -73,7 +73,7 @@ func Shop() {
 			fmt.Println("You lack the funds buddy")
 			Shop()
 		}
-	} else if moneyspendlower == "s" {
+	} else if moneyspendlower == "l" {
 		if 30 <= cfunds {
 			fmt.Println("Aquired Long sword")
 			db.Exec("UPDATE bankaccount SET cfunds = $1 WHERE name = $2", cfunds-30, name)
